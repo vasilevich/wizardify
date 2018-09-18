@@ -188,10 +188,13 @@
     float: left;
     width: 33.333333%;
     padding: 0 5px;
+    text-align: center;
 }
 
 .f1 .f1-step-icon {
-    display: inline-block;
+    display: block;
+    float: none;
+    margin: 0 auto;
     width: 40px;
     height: 40px;
     margin-top: 4px;
