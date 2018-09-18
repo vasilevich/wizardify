@@ -1,6 +1,6 @@
 {
   "name": "wizardify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple jquery + bootstrap plugin that creates and moves a very simple wizard",
   "main": "dist/js/wizardify.js",
   "scripts": {
@@ -28,5 +28,11 @@
   "bugs": {
     "url": "https://github.com/vasilevich/wizardify/issues"
   },
-  "homepage": "https://github.com/vasilevich/wizardify#readme"
+  "homepage": "https://github.com/vasilevich/wizardify#readme",
+  "keywords": [
+    "wizard",
+    "jquery",
+    "bootstrap",
+    "rtl"
+  ]
 }
