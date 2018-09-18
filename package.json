@@ -1,6 +1,6 @@
 {
   "name": "wizardify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple jquery + bootstrap plugin that creates and moves a very simple wizard",
   "main": "dist/js/wizardify.js",
   "scripts": {
@@ -19,10 +19,9 @@
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "latest",
     "gulp-csso": "^2.0.0",
-    "gulp-uglify": "^3.0.1",
+    "gulp-uglify": "^2.0.0",
     "babel-preset-es2015": "^6.5.0",
     "gulp-babel": "^6.1.2",
-    "gulp-uglify": "^2.0.0",
     "run-sequence": "^2.2.1"
   },
   "bugs": {
