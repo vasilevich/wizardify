@@ -1,0 +1,26 @@
+.idea
+.gradle
+build
+dist
+out/artifacts/*/*
+out/production
+!*.exe
+!out/artifacts/EmailSender_jar/EmailSender.exe
+!out/artifacts/FenixFiller_jar/FenixFiller.exe
+!out/artifacts/FenixFiller_jar/FenixFillerNoCoupon.exe
+!out/artifacts/FenixFillerNoCoupon_jar/FenixFillerNoCoupon.exe
+!out/artifacts/TripArkiaFiller_jar/TripArkiaFiller.exe
+!out/artifacts/TripFetcher_jar/TripFetcher.exe
+!out/artifacts/TripIstaFiller_jar/TripIstaFiller.exe
+# Ignore Gradle GUI config
+gradle-app.setting
+!gradle-wrapper.jar
+*.xlsx
+*.xls
+# Cache of project
+.gradletasknamecache
+src/test/
+big.xlsx
+bower_components
+node_modules
+*___jb_old___
