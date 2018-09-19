@@ -111,79 +111,81 @@ npm install wizardify
        <script src="src/js/wizardify.js"></script>
        <script>
            $("#wizard").wizardify({
-               /**
-                * override to not allow or allow next with conditions
-                * @param step
-                * @param fieldSet
-                * @param nextStep
-                * @param nextFieldSet
-                * @returns {boolean}
-                */
-               onNext: (step, fieldSet, nextStep, nextFieldSet) => {
-                   return true;
-               },
-               /**
-                * override to not allow or allow previous with conditions
-                * @param step
-                * @param fieldSet
-                * @param nextStep
-                * @param nextFieldSet
-                * @returns {boolean}
-                */
-               onPrevious: (step, fieldSet, nextStep, nextFieldSet) => {
-                   return true;
-               },
-               /**
-                * override to not allow or allow finish with conditions
-                * @returns {boolean}
-                */
-               onFinish: () => {
-                   return true;
-               },
-               /**
-                * override to not allow or allow reset with conditions
-                * @returns {boolean}
-                */
-               onReset: () => {
-                   return true;
-               },
-               /**
-                * When a step is clicked directly, this method runs, true/false decides wether to allow it.
-                * @param step
-                * @param fieldSet
-                * @param nextStep
-                * @param nextFieldSet
-                * @returns {boolean}
-                */
-               onStepClick: (step, fieldSet, nextStep, nextFieldSet) => {
-       
-                   return true;
-               },
-               /**
-                * boolean true or false.
-                */
-               rtl: $(document).attr("dir") === "rtl" ? true : false,
-               /**
-                * Steps are clickable and can move around the wizard
-                */
-               stepClickable: true,
-               /**
-                * Jquery animation to use to make the field appear, eg fadeIn , slideDown and others (check jquery docs).
-                */
-               fieldAppearAnimation: "fadeIn",
-               /**
-                * Jquery field appear timeout check jquery documentation for fadeIn and slideDown for more details.
-                */
-               fieldAppearAnimationTimeout: 400,
-               /**
-                * Jquery animation to use to make the field appear, eg fadeOut , slideUp and others (check jquery docs).
-                */
-               fieldDisappearAnimation: "fadeOut",
-               /**
-                * Jquery field appear timeout check jquery documentation for fadeOut and slideUp for more details.
-                */
-               fieldDisappearAnimationTimeout: 400,
-           });
+                   /**
+                    * override to not allow or allow next with conditions
+                    * @param step
+                    * @param fieldSet
+                    * @param nextStep
+                    * @param nextFieldSet
+                    * @returns {boolean} if true the next step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
+                    */
+                   onNext: (step, fieldSet, nextStep, nextFieldSet) => {
+                       //  nextStep.trigger("switchTo");  //async
+                       return true; //sync
+                   },
+                   /**
+                    * override to not allow or allow previous with conditions
+                    * @param step
+                    * @param fieldSet
+                    * @param nextStep
+                    * @param nextFieldSet
+                    * @returns {boolean} if true the previous step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
+                    */
+                   onPrevious: (step, fieldSet, nextStep, nextFieldSet) => {
+                       //  nextStep.trigger("switchTo");  //async
+                       return true; //sync
+                   },
+                   /**
+                    * override to not allow or allow finish with conditions
+                    * @returns {boolean}
+                    */
+                   onFinish: () => {
+                       return true;
+                   },
+                   /**
+                    * override to not allow or allow reset with conditions
+                    * @returns {boolean}
+                    */
+                   onReset: () => {
+                       return true;
+                   },
+                   /**
+                    * When a step is clicked directly, this method runs, true/false decides wether to allow it.
+                    * @param step
+                    * @param fieldSet
+                    * @param nextStep
+                    * @param nextFieldSet
+                    * @returns {boolean} if true the clicked step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
+                    */
+                   onStepClick: (step, fieldSet, nextStep, nextFieldSet) => {
+                       //  nextStep.trigger("switchTo");  //async
+                       return true; //sync
+                   },
+                   /**
+                    * boolean true or false.
+                    */
+                   rtl: $(document).attr("dir") === "rtl" ? true : false,
+                   /**
+                    * Steps are clickable and can move around the wizard
+                    */
+                   stepClickable: true,
+                   /**
+                    * Jquery animation to use to make the field appear, eg fadeIn , slideDown and others (check jquery docs).
+                    */
+                   fieldAppearAnimation: "fadeIn",
+                   /**
+                    * Jquery field appear timeout check jquery documentation for fadeIn and slideDown for more details.
+                    */
+                   fieldAppearAnimationTimeout: 400,
+                   /**
+                    * Jquery animation to use to make the field appear, eg fadeOut , slideUp and others (check jquery docs).
+                    */
+                   fieldDisappearAnimation: "fadeOut",
+                   /**
+                    * Jquery field appear timeout check jquery documentation for fadeOut and slideUp for more details.
+                    */
+                   fieldDisappearAnimationTimeout: 400,
+               });
        </script>           
     ```
 ## License

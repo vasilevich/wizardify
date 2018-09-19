@@ -67,10 +67,11 @@ $.fn.wizardify = function (options) {
          * @param fieldSet
          * @param nextStep
          * @param nextFieldSet
-         * @returns {boolean}
+         * @returns {boolean} if true the next step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
         onNext: (step, fieldSet, nextStep, nextFieldSet) => {
-            return true;
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * override to not allow or allow previous with conditions
@@ -78,10 +79,11 @@ $.fn.wizardify = function (options) {
          * @param fieldSet
          * @param nextStep
          * @param nextFieldSet
-         * @returns {boolean}
+         * @returns {boolean} if true the previous step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
         onPrevious: (step, fieldSet, nextStep, nextFieldSet) => {
-            return true;
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * override to not allow or allow finish with conditions
@@ -103,11 +105,11 @@ $.fn.wizardify = function (options) {
          * @param fieldSet
          * @param nextStep
          * @param nextFieldSet
-         * @returns {boolean}
+         * @returns {boolean} if true the clicked step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
         onStepClick: (step, fieldSet, nextStep, nextFieldSet) => {
-
-            return true;
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * boolean true or false.
@@ -156,15 +158,56 @@ $.fn.wizardify = function (options) {
                 stepsArr.push(li);
                 stepsContainer.prepend(li)
             });
-
         const fieldSetContainer = this.find("fieldset").parent();
+        let fieldIsChanging = false;
         fieldSetContainer.append(stepsContainer);
         fieldSetContainer
             .children()
             .each(function (i, li) {
                 fieldSetContainer.prepend(li);
-                $(stepsArr[i]).data("fieldSet", $(li));
-                $(stepsArr[i]).data("fieldSetIndex", i);
+                $(stepsArr[i])
+                    .data("fieldSet", $(li))
+                    .data("fieldSetIndex", i)
+                    .bind("switchTo", function () {
+                        const currentActiveStep = wizardify.find('.f1-step.active');
+                        const currentFieldSet = currentActiveStep.data("fieldSet");
+                        const nextActiveStep = $(stepsArr[i]);
+                        const nextFieldSet = nextActiveStep.data("fieldSet");
+                        if (!fieldIsChanging && !nextActiveStep.is(currentActiveStep)) {
+                            fieldIsChanging = true;
+                            if (settings.onStepClick(currentActiveStep, currentFieldSet, nextActiveStep, nextFieldSet)) {
+                                const indexStart = currentActiveStep.data("fieldSetIndex");
+                                const indexEnd = nextActiveStep.data("fieldSetIndex");
+                                currentFieldSet[settings.fieldDisappearAnimation](settings.fieldDisappearAnimationTimeout, function () {
+                                    fieldIsChanging = false;
+                                    // progress bar
+                                    if (indexStart < indexEnd) {
+                                        for (let index = indexStart; index < indexEnd; index++) {
+                                            bar_progress('right');
+                                            const step = $(stepsContainer
+                                                .find(".f1-step")
+                                                .toArray().find(step => $(step).data("fieldSetIndex") == index));
+                                            step.removeClass('active').addClass('activated');
+                                        }
+                                    }
+                                    else if (indexStart > indexEnd) {
+                                        for (let index = indexStart; index > indexEnd; index--) {
+                                            bar_progress('left');
+                                            const step = $(stepsContainer
+                                                .find(".f1-step")
+                                                .toArray().find(step => $(step).data("fieldSetIndex") == index));
+                                            step.removeClass('active activated');
+                                        }
+                                    }
+
+                                    nextActiveStep.removeClass('activated').addClass('active');
+                                    nextFieldSet[settings.fieldAppearAnimation](settings.fieldAppearAnimationTimeout);
+                                    // scroll window to beginning of the form
+                                    scroll_to_class($('.f1'), 20);
+                                });
+                            }
+                        }
+                    });
             });
     }
 
@@ -189,16 +232,7 @@ $.fn.wizardify = function (options) {
                 nextFieldSet = currentFieldSet.next();
             }
             if (settings.onNext(currentActiveStep, currentFieldSet, nextActiveStep, nextFieldSet) && Math.floor(progressLine.data('now-value')) <= Math.floor(stepAmount * defaultProgressWidthData)) {
-                currentFieldSet[settings.fieldDisappearAnimation](settings.fieldDisappearAnimationTimeout, function () {
-                    // progress bar
-                    bar_progress('right');
-                    currentActiveStep.removeClass('active').addClass('activated');
-                    nextActiveStep.addClass('active');
-                    nextFieldSet[settings.fieldAppearAnimation](settings.fieldAppearAnimationTimeout);
-                    // scroll window to beginning of the form
-                    scroll_to_class($('.f1'), 20);
-                });
-
+                nextActiveStep.trigger("switchTo");
             }
         });
 
@@ -219,18 +253,8 @@ $.fn.wizardify = function (options) {
                 nextActiveStep = currentActiveStep.prev();
                 nextFieldSet = currentFieldSet.prev();
             }
-
             if (settings.onPrevious(currentActiveStep, currentFieldSet, nextActiveStep, nextFieldSet) && Math.floor(progressLine.data('now-value')) > Math.floor(defaultProgressWidthData)) {
-                currentFieldSet[settings.fieldDisappearAnimation](settings.fieldDisappearAnimationTimeout, function () {
-
-                    // progress bar
-                    bar_progress('left');
-                    currentActiveStep.removeClass('active');
-                    nextActiveStep.removeClass("activated").addClass('active');
-                    nextFieldSet[settings.fieldAppearAnimation](settings.fieldAppearAnimationTimeout);
-                    // scroll window to beginning of the form
-                    scroll_to_class($('.f1'), 20);
-                });
+                nextActiveStep.trigger("switchTo");
             }
         });
 
@@ -245,45 +269,13 @@ $.fn.wizardify = function (options) {
         wizardify
             .find('.f1-step-icon')
             .on('click', function () {
-                const currentActiveStep = wizardify.find('.f1-step.active');
-                const currentFieldSet = currentActiveStep.data("fieldSet");
                 const nextActiveStep = $(this).parents(".f1-step");
-                const nextFieldSet = nextActiveStep.data("fieldSet");
-                if (settings.onStepClick(currentActiveStep, currentFieldSet, nextActiveStep, nextFieldSet)) {
-                    const indexStart = currentActiveStep.data("fieldSetIndex");
-                    const indexEnd = nextActiveStep.data("fieldSetIndex");
-                    currentFieldSet[settings.fieldDisappearAnimation](settings.fieldDisappearAnimationTimeout, function () {
-                        // progress bar
-                        if (indexStart < indexEnd) {
-                            for (let index = indexStart; index < indexEnd; index++) {
-                                bar_progress('right');
-                                const step = $(stepsContainer
-                                    .find(".f1-step")
-                                    .toArray().find(step => $(step).data("fieldSetIndex") == index));
-                                step.removeClass('active').addClass('activated');
-                            }
-                        }
-                        else if (indexStart > indexEnd) {
-                            for (let index = indexStart; index > indexEnd; index--) {
-                                bar_progress('left');
-                                const step = $(stepsContainer
-                                    .find(".f1-step")
-                                    .toArray().find(step => $(step).data("fieldSetIndex") == index));
-                                step.removeClass('active activated');
-                            }
-                        }
-
-                        nextActiveStep.removeClass('activated').addClass('active');
-                        nextFieldSet[settings.fieldAppearAnimation](settings.fieldAppearAnimationTimeout);
-                        // scroll window to beginning of the form
-                        scroll_to_class($('.f1'), 20);
-                    });
-                }
+                nextActiveStep.trigger("switchTo");
             });
     }
 
     // submit
-    this
+    wizardify
         .on('submit', function (e) {
             if (settings.onFinish()) {
                 $(this).find('input[type="text"], input[type="password"], textarea').each(function () {

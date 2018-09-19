@@ -128,10 +128,11 @@
          * @param fieldSet
          * @param nextStep
          * @param nextFieldSet
-         * @returns {boolean}
+         * @returns {boolean} if true the next step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
         onNext: (step, fieldSet, nextStep, nextFieldSet) => {
-            return true;
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * override to not allow or allow previous with conditions
@@ -139,10 +140,11 @@
          * @param fieldSet
          * @param nextStep
          * @param nextFieldSet
-         * @returns {boolean}
+         * @returns {boolean} if true the previous step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
         onPrevious: (step, fieldSet, nextStep, nextFieldSet) => {
-            return true;
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * override to not allow or allow finish with conditions
@@ -159,18 +161,24 @@
             return true;
         },
         /**
-         * When a step is clicked directly, this method runs
+         * When a step is clicked directly, this method runs, true/false decides wether to allow it.
          * @param step
-         * @returns {boolean}
+         * @param fieldSet
+         * @param nextStep
+         * @param nextFieldSet
+         * @returns {boolean} if true the clicked step will appear, if not then it won't, to switch step asynchronously:  nextStep.trigger("switchTo");
          */
-        onStepClick: (step) => {
-
-            return true;
+        onStepClick: (step, fieldSet, nextStep, nextFieldSet) => {
+            //  nextStep.trigger("switchTo");  //async
+            return true; //sync
         },
         /**
          * boolean true or false.
          */
         rtl: $(document).attr("dir") === "rtl" ? true : false,
+        /**
+         * Steps are clickable and can move around the wizard
+         */
         stepClickable: true,
         /**
          * Jquery animation to use to make the field appear, eg fadeIn , slideDown and others (check jquery docs).
