@@ -159,14 +159,11 @@
             return true;
         },
         /**
-         * When a step is clicked directly, this method runs, true/false decides wether to allow it.
+         * When a step is clicked directly, this method runs
          * @param step
-         * @param fieldSet
-         * @param nextStep
-         * @param nextFieldSet
          * @returns {boolean}
          */
-        onStepClick: (step, fieldSet, nextStep, nextFieldSet) => {
+        onStepClick: (step) => {
 
             return true;
         },
@@ -174,9 +171,6 @@
          * boolean true or false.
          */
         rtl: $(document).attr("dir") === "rtl" ? true : false,
-        /**
-         * Steps are clickable and can move around the wizard
-         */
         stepClickable: true,
         /**
          * Jquery animation to use to make the field appear, eg fadeIn , slideDown and others (check jquery docs).

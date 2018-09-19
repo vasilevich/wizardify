@@ -237,11 +237,6 @@
 
 .f1 fieldset {
     display: none;
-    text-align: left;
-}
-
-.f1 .f1-buttons {
-    text-align: right;
 }
 
 .f1 .input-error {
