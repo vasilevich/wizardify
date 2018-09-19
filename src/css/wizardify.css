@@ -1,8 +1,8 @@
 
-.f1 input[type="text"],
-.f1 input[type="password"],
-.f1 textarea,
-.f1 textarea.form-control {
+.f1 input.f1[type="text"],
+.f1 input.f1[type="password"],
+.f1 textarea.f1,
+.f1 textarea.f1.form-control {
     height: 44px;
     margin: 0;
     padding: 0 20px;
@@ -27,18 +27,18 @@
     transition: all .3s;
 }
 
-.f1 textarea,
-.f1 textarea.form-control {
+.f1 textarea.f1,
+.f1 textarea.f1.form-control {
     height: 90px;
     padding-top: 8px;
     padding-bottom: 8px;
     line-height: 30px;
 }
 
-.f1 input[type="text"]:focus,
-.f1 input[type="password"]:focus,
-.f1 textarea:focus,
-.f1 textarea.form-control:focus {
+.f1 input.f1[type="text"]:focus,
+.f1 input.f1[type="password"]:focus,
+.f1 textarea.f1:focus,
+.f1 textarea.f1.form-control:focus {
     outline: 0;
     background: #fff;
     border: 1px solid #ccc;
@@ -47,32 +47,32 @@
     box-shadow: none;
 }
 
-.f1 input[type="text"]:-moz-placeholder,
-.f1 input[type="password"]:-moz-placeholder,
-.f1 textarea:-moz-placeholder,
-.f1 textarea.form-control:-moz-placeholder {
+.f1 input.f1[type="text"]:-moz-placeholder,
+.f1 input.f1[type="password"]:-moz-placeholder,
+.f1 textarea.f1:-moz-placeholder,
+.f1 textarea.f1.form-control:-moz-placeholder {
     color: #888;
 }
 
-.f1 input[type="text"]:-ms-input-placeholder,
-.f1 input[type="password"]:-ms-input-placeholder,
-.f1 textarea:-ms-input-placeholder,
-.f1 textarea.form-control:-ms-input-placeholder {
+.f1 input.f1[type="text"]:-ms-input-placeholder,
+.f1 input.f1[type="password"]:-ms-input-placeholder,
+.f1 textarea.f1:-ms-input-placeholder,
+.f1 textarea.f1.form-control:-ms-input-placeholder {
     color: #888;
 }
 
-.f1 input[type="text"]::-webkit-input-placeholder,
-.f1 input[type="password"]::-webkit-input-placeholder,
-.f1 textarea::-webkit-input-placeholder,
-.f1 textarea.form-control::-webkit-input-placeholder {
+.f1 input.f1[type="text"]::-webkit-input-placeholder,
+.f1 input.f1[type="password"]::-webkit-input-placeholder,
+.f1 textarea.f1::-webkit-input-placeholder,
+.f1 textarea.f1.form-control::-webkit-input-placeholder {
     color: #888;
 }
 
-.f1 label {
+.f1 label.f1 {
     font-weight: 300;
 }
 
-.f1 button.btn {
+.f1 button.f1.btn {
     min-width: 105px;
     height: 40px;
     margin: 0;
@@ -98,12 +98,12 @@
     transition: all .3s;
 }
 
-.f1 button.btn:hover {
+.f1 button.f1.btn:hover {
     opacity: 0.6;
     color: #fff;
 }
 
-.f1 button.btn:active {
+.f1 button.f1.btn:active {
     outline: 0;
     opacity: 0.6;
     color: #fff;
@@ -112,35 +112,39 @@
     box-shadow: none;
 }
 
-.f1 button.btn:focus,
-.f1 button.btn:active:focus,
-.f1 button.btn.active:focus {
+.f1 button.f1.btn:focus,
+.f1 button.f1.btn:active:focus,
+.f1 button.f1.btn.active:focus {
     outline: 0;
     opacity: 0.6;
     color: #fff;
 }
 
-.f1 button.btn.btn-next,
-.f1 button.btn.btn-next:focus,
-.f1 button.btn.btn-next:active:focus,
-.f1 button.btn.btn-next.active:focus {
+.f1 button.f1.btn.btn-next,
+.f1 button.f1.btn.btn-next:focus,
+.f1 button.f1.btn.btn-next:active:focus,
+.f1 button.f1.btn.btn-next.active:focus {
     background: #f35b3f;
 }
 
-.f1 button.btn.btn-submit,
-.f1 button.btn.btn-submit:focus,
-.f1 button.btn.btn-submit:active:focus,
-.f1 button.btn.btn-submit.active:focus {
+.f1 button.f1.btn.btn-submit,
+.f1 button.f1.btn.btn-submit:focus,
+.f1 button.f1.btn.btn-submit:active:focus,
+.f1 button.f1.btn.btn-submit.active:focus {
     background: #f35b3f;
 }
 
-.f1 button.btn.btn-previous,
-.f1 button.btn.btn-previous:focus,
-.f1 button.btn.btn-previous:active:focus,
-.f1 button.btn.btn-previous.active:focus {
+.f1 button.f1.btn.btn-previous,
+.f1 button.f1.btn.btn-previous:focus,
+.f1 button.f1.btn.btn-previous:active:focus,
+.f1 button.f1.btn.btn-previous.active:focus {
     background: #bbb;
 }
-
+.f1 h3.f1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
 .f1 {
     padding: 25px;
     background: #fff;
@@ -149,11 +153,7 @@
     border-radius: 4px;
 }
 
-.f1 h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
+
 
 .f1 .f1-steps {
     display: none;
@@ -249,8 +249,8 @@
 
 @media (max-width: 415px) {
 
-    .f1 h1,
-    .f1 h2 {
+    .f1 h1.f1,
+    .f1 h2.f1 {
         font-size: 32px;
     }
 
