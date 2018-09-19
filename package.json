@@ -1,6 +1,6 @@
 {
   "name": "wizardify",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple jquery + bootstrap plugin that creates and moves a very simple wizard",
   "main": "dist/js/wizardify.js",
   "scripts": {
