@@ -142,6 +142,7 @@ $.fn.wizardify = function (options) {
     const stepAmount = stepsContainer.find(".f1-step").length;
     const defaultProgressWidthCss = percentage(1, stepAmount * 2) + "%";
     const defaultProgressWidthData = percentage(1, stepAmount * 2);
+    stepsContainer.find(".f1-step").css("width", percentage(1, stepAmount) + "%");
 
     if (settings.stepClickable) {
         wizardify.addClass("clickableSteps");
